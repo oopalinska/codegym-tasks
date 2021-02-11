@@ -1,4 +1,4 @@
-package Task3101;
+package task3101;
 
 import java.io.File;
 
