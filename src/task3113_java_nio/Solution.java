@@ -1,4 +1,4 @@
-package task3113;
+package task3113_java_nio;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -28,13 +28,13 @@ public class Solution {
         else {
             Files.walkFileTree(enteredPath, new SimpleFileVisitor<Path>() {
                 @Override
-                public FileVisitResult preVisitDirectory(Path dir, BasicFileAttributes attrs) throws IOException {
+                public FileVisitResult preVisitDirectory(Path dir, BasicFileAttributes attrs) {
                     // I'm not supposed to add the given directory to folderCount - only the folders inside of it
                     if (!dir.equals(enteredPath)) folderCount++;
                     return FileVisitResult.CONTINUE;
                 }
                 @Override
-                public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
+                public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) {
                     fileCount++;
                     sizeCount += attrs.size();
                     return FileVisitResult.CONTINUE;

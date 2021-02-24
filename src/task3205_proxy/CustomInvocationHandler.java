@@ -1,4 +1,4 @@
-package task3205;
+package task3205_proxy;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;

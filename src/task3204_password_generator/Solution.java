@@ -1,4 +1,4 @@
-package task3204;
+package task3204_password_generator;
 
 import java.io.ByteArrayOutputStream;
 

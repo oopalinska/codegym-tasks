@@ -1,4 +1,4 @@
-package task3105;
+package task3105_zip_file;
 
 import java.io.*;
 import java.nio.file.Files;

@@ -1,4 +1,4 @@
-package task3106;
+package task3106_zip_file;
 
 /*
 Unzipping a file

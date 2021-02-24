@@ -1,4 +1,4 @@
-package task3205;
+package task3205_proxy;
 
 /*
 Creating a proxy object

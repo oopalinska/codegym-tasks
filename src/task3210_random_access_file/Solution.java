@@ -1,4 +1,4 @@
-package task3210;
+package task3210_random_access_file;
 
 import java.io.IOException;
 import java.io.RandomAccessFile;

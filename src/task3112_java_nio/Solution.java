@@ -1,4 +1,4 @@
-package task3112;
+package task3112_java_nio;
 
 import java.io.IOException;
 import java.io.InputStream;
