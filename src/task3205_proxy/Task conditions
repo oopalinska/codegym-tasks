@@ -17,3 +17,24 @@ Requirements:
 4. Before calling any of the original object's methods, the phrase "<methodName> in" must be displayed.
 5. After calling one of the original object's methods, the phrase "<methodName> out" must be displayed.
 6. The getProxy() method must create a proxy for the SomeInterfaceWithMethods interface.
+
+~!~!~!~!~!~!~!~!~!~!~!~!~!~!~!~!~!~!~!~!
+How to implement a proxy design pattern:
+
+1. There is a class implementing some interface.
+2. We create the invocation handler - our own class that must implement the interface InvocationHandler
+   and override it’s invoke method.
+3. In our invocation handler class we add a variable that is an instance of our class’s interface from point 1.
+   We create a constructor and pass this variable as an argument.
+4. Now in the main method or any method that is responsible for “action”, we first create an object based on a class
+   from point 1. Then we create variables: a ClassLoader (object.getclass().getClassLoader())
+   and Class[] objInterfaces = object.getClass().getInterfaces().
+5. The last step: our proxy object needs to be of a type of interface that is implemented by class from point 1.
+   We create it, passing the arguments that we just created: class loader, array of interfaces and the new instance
+   of our invocation handler.
+6. Example: SomeInterface proxyObject = (SomeInterface) Proxy.newProxyInstance (objClassLoader, objInterfaces,
+   new objInvocationHandler(obj));
+7. Now the methods we use on the proxyObject will behave the way that we indicated in our invocation handler’s
+   invoke method.
+8. If we want the invoke method to just add some behaviour and not override it, then we need to also call:
+   method.invoke(obj, args) when returning it.
