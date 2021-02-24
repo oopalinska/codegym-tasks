@@ -12,7 +12,7 @@ import java.rmi.server.UnicastRemoteObject;
 Toward an RMI server
 
 COME BACK TO THIS TASK
-(I don't really understand how I completed it by myself
+(I don't really understand how I completed it by myself)
 */
 
 public class Solution {
