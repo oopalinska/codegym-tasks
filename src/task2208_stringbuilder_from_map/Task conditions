@@ -1,0 +1,19 @@
+Build a WHERE query
+
+Build part of a WHERE query using StringBuilder.
+If a parameter is null, then it shouldn't be included in the query.
+
+Example:
+
+{name=Johnson, country=United States, city=Los Angeles, age=null}
+Result:
+name = 'Johnson' and country = 'United States' and city = 'Los Angeles'
+
+Requirements:
+•	The getQuery method must have one Map parameter.
+•	The getQuery method must return a String.
+•	The getQuery method must be static.
+•	The getQuery method must return a string built according to the rules specified in the task conditions.
+
+
+
