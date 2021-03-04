@@ -1,4 +1,4 @@
 package task2309_anonymous_class.vo;
 
-public class Subject {
+public class Subject extends NamedItem {
 }
