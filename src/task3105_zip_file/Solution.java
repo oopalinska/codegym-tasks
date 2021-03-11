@@ -12,7 +12,6 @@ import java.util.zip.ZipOutputStream;
 Adding a file to an archive
 
 */
-//NOTE: I'VE GOT MOST OF THE METHODS CODE FROM COMMUNITY HELP SECTION ON CODEGYM
 
 public class Solution {
     public static File fileToBeAdded;

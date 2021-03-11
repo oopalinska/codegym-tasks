@@ -1,20 +1,19 @@
-File downloader
+Iterating through a file tree
 
-Implement a downloadFile(String urlString, Path downloadDirectory) method whose inputs are a URL to a file to be downloaded and the destination folder for the download.
-All URLs have the following form:
-https://yastatic.net/morda-logo/i/citylogos/yandex19-logo-ru.png
-http://toogle.com/files/rules.txt
-https://pacemook.com/photos/image1.jpg
-
-The method must create a URL object and download the file's contents to the local disk.
-Download it to a temporary directory first so that if the download fails, there won't be partially downloaded files in your directory.
-Then move the file to the user's directory. Take the file name from the URL.
-Only use classes and methods from the java.nio package.
-
+1. The main method is passed two arguments as inputs.
+The first argument is path, which is the path to the directory; the second is resultFileAbsolutePath, which is the name
+(full path) of an existing file that will store the result.
+2. For each file in the path directory and in all of its subdirectories, do the following:
+For each file whose size in bytes is NOT greater than 50, do the following:
+2.1. Sort them by file name in ascending order. Don't include the path when sorting.
+2.2. Rename resultFileAbsolutePath to "allFilesContent.txt" (use the FileUtils.renameFile method and FileUtils.isExist if necessary).
+2.3. Sequentially write the contents of each file from step 2.1 to allFilesContent.txt. After the body of each file, write "\n".
+All files have the TXT extension.
+Use "/" as the path separator.
 
 Requirements:
-1. The downloadFile method must create a URL object from the passed URL.
-2. The downloadFile method must create a temporary file using the Files.createTempFile method.
-3. The downloadFile method must download the file at the URL to a temporary file using the Files.copy method.
-4. The downloadFile method must move the file from the temporary directory to the user's directory using the Files.move method.
-5. The saved file's name must be the same as in the URL.
+•	The file passed as the second argument to main must be renamed to allFilesContent.txt.
+•	You need to create a stream to write to the renamed file.
+•	The contents of every file that is 50 bytes or smaller must be sorted by file name and written to the allFilesContent.txt file.
+•	The output stream to the file must be closed.
+•	Don't use static variables.
