@@ -16,7 +16,7 @@ Requirements:
 5. The run() method must catch NotBoundExceptions.
 
 ~!~!~!~!~!~!~!~!~!~!~!~!~!~!~!~!~!~!~!~!
-How to implement an RMI design pattern:
+How to implement an RMI API:
 
 1. On the server program, we create an interface that extends Remote (marker interface).
    All its methods have to throw RemoteException.
