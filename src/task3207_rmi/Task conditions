@@ -14,3 +14,32 @@ Requirements:
 3. In the run() method, you need to display the result of calling the doubleString(String) method.
 4. The run() method must catch RemoteExceptions.
 5. The run() method must catch NotBoundExceptions.
+
+~!~!~!~!~!~!~!~!~!~!~!~!~!~!~!~!~!~!~!~!
+How to implement an RMI design pattern:
+
+1. On the server program, we create an interface that extends Remote (marker interface).
+   All its methods have to throw RemoteException.
+
+2. Now we create a server class that will implement interface from point 1.
+
+3. Third class will have the main method with a server program and it will configure and run our object of the class
+   from point 2. It needs few essential lines:
+* a class variable e.g. public static final String UNIQUE_BINDING_NAME = “server.something”;
+* In the main method create an object of a class from p.2 e.g. final RemoteServer server = new RemoteServer()
+* create registry of remote objects: final Registry registry = LocateRegistry.createRegistry(2099)
+* create a stub that receives information about a remote call of some method, deserializes its parameters and calls
+  desired method: Remote stub = UnicastRemoteObject.exportObject (server, 0);
+* register our stub in the remote object registry under the name we made up earlier:
+  registry.bind (UNIQUE_BINDING_NAME, stub);
+* put main thread to sleep: Thread.sleep(Integer.MAX_VALUE);
+
+4. Now we can write the client program: a class with main method.
+* first, the client must know the unique name of the object whose methods it will call remotely.
+  So we need to create the same class variable as for the server:
+  public static final String UNIQUE_BINDING_NAME = “server.something”;
+* In the main method, we get access to the registry of remote objects:
+  final Registry registry = LocateRegistry.getRegistry(2099)
+* now we just get desired object from the registry:
+  SomeInterface obj = (SomeInterface) registry.lookup (UNIQUE_BINDING_NAME); we cast to the interface from point 1.
+* finally we can remotely call the needed method: obj.method(arguments);

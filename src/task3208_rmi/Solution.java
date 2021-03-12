@@ -11,12 +11,13 @@ import java.rmi.server.UnicastRemoteObject;
 /*
 RMI (part 2)
 
-COME BACK TO THIS TASK
-(I don't know how it works)
+Check out the task 3207 for my own instructions how to implement RMI.
 */
 
 public class Solution {
-    public static final String UNIC_BINDING_NAME = "animals.behaviour";
+    // Each object should have its own binding name!
+    public static final String UNIC_BINDING_NAME1 = "server.cat";
+    public static final String UNIC_BINDING_NAME2 = "server.dog";
     public static Registry registry;
 
     // Pretend we're starting an RMI client as the CLIENT_THREAD thread
@@ -39,15 +40,14 @@ public class Solution {
     public static Thread SERVER_THREAD = new Thread(new Runnable() {
         @Override
         public void run() {
-            //write your code here
             try {
                 Cat cat = new Cat("Koń");
                 Dog dog = new Dog("Azor");
                 registry = LocateRegistry.createRegistry(2099);
                 Remote stub1 = UnicastRemoteObject.exportObject(cat, 2099);
                 Remote stub2 = UnicastRemoteObject.exportObject(dog, 2099);
-                registry.bind(UNIC_BINDING_NAME, stub1);
-                registry.bind(UNIC_BINDING_NAME, stub2);
+                registry.bind(UNIC_BINDING_NAME1, stub1);
+                registry.bind(UNIC_BINDING_NAME2, stub2);
             } catch (RemoteException | AlreadyBoundException e) {
                 e.printStackTrace();
             }

@@ -11,11 +11,13 @@ import java.rmi.server.UnicastRemoteObject;
 /*
 Toward an RMI server
 
-COME BACK TO THIS TASK
-(I don't really understand how I completed it by myself)
+In the "Task conditions" file I added my step-by-step instruction how to implement an RMI.
 */
 
 public class Solution {
+    // This variable is essential! Needs to be declared in both server and client main classes.
+    // Here we have only one, because both "sides" (client and server) are here as two different threads
+    // (just in order to make this task more condensed).
     public static final String UNIC_BINDING_NAME = "double.string";
     public static Registry registry;
 

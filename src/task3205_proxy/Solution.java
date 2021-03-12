@@ -4,7 +4,7 @@ package task3205_proxy;
 Creating a proxy object
 
 This is a basic example of implementing a proxy pattern.
-In the "Task conditions" file I'm adding my step-by-step instruction how to do it.
+In the "Task conditions" file I added my step-by-step instruction how to do it.
 */
 
 import java.lang.reflect.Proxy;
