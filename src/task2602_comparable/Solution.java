@@ -1,4 +1,4 @@
-package task2602;
+package task2602_comparable;
 
 import java.util.Set;
 import java.util.TreeSet;

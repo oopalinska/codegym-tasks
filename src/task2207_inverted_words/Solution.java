@@ -23,8 +23,9 @@ public class Solution {
         BufferedReader fileReader = new BufferedReader(new FileReader(reader.readLine()));
         reader.close();
         // Fill the previously created words list with all the words included in the file.
-        while (fileReader.ready())
+        while (fileReader.ready()) {
             words.addAll(Arrays.asList(fileReader.readLine().split(" ")));
+        }
         fileReader.close();
 
         // We need to work with two pointers: one for the first word and one for the second word to compare.
@@ -72,8 +73,8 @@ public class Solution {
 
             Pair pair = (Pair) o;
 
-            if (first != null ? !first.equals(pair.first) : pair.first != null) return false;
-            return second != null ? second.equals(pair.second) : pair.second == null;
+            if (!Objects.equals(first, pair.first)) return false;
+            return Objects.equals(second, pair.second);
 
         }
 
