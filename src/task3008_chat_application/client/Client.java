@@ -3,6 +3,7 @@ package task3008_chat_application.client;
 import task3008_chat_application.*;
 
 import java.io.IOException;
+import java.net.Socket;
 
 public class Client {
     protected Connection connection;
@@ -70,5 +71,65 @@ public class Client {
 
     public class SocketThread extends Thread {
 
+        public void run() {
+            try {
+                final String serverAddress = getServerAddress();
+                final int serverPort = getServerPort();
+                final Socket socket = new Socket(serverAddress, serverPort);
+                connection = new Connection(socket);
+                clientHandshake();
+                clientMainLoop();
+            } catch (IOException | ClassNotFoundException e) {
+                notifyConnectionStatusChanged(false);
+            }
+        }
+        protected void processIncomingMessage(String message) {
+            ConsoleHelper.writeMessage(message);
+        }
+        protected void informAboutAddingNewUser(String userName) {
+            ConsoleHelper.writeMessage(userName + " has joined the chat");
+        }
+        protected void informAboutDeletingNewUser(String userName) {
+            ConsoleHelper.writeMessage(userName + "has left the chat");
+        }
+        protected void notifyConnectionStatusChanged(boolean clientConnected) {
+            Client.this.clientConnected = clientConnected;
+            synchronized(Client.this) {
+                Client.this.notify();
+            }
+        }
+        protected void clientHandshake() throws IOException, ClassNotFoundException {
+            while(true) {
+                final Message received = connection.receive();
+                if (received.getType() == MessageType.NAME_REQUEST) {
+                    connection.send(new Message(MessageType.USER_NAME, getUserName()));
+                }
+                else if (received.getType() == MessageType.NAME_ACCEPTED) {
+                    notifyConnectionStatusChanged(true);
+                    break;
+                }
+                else {
+                    throw new IOException("Unexpected MessageType");
+                }
+            }
+        }
+        protected void clientMainLoop() throws IOException, ClassNotFoundException {
+            while(true) {
+                final Message received = connection.receive();
+                if (received.getType() == MessageType.TEXT) {
+                    processIncomingMessage(received.getData());
+                }
+                else if (received.getType() == MessageType.USER_ADDED) {
+                    informAboutAddingNewUser(received.getData());
+                }
+                else if (received.getType() == MessageType.USER_REMOVED) {
+                    informAboutDeletingNewUser(received.getData());
+                }
+                else {
+                    throw new IOException("Unexpected MessageType");
+                }
+            }
+        }
     }
 }
+
