@@ -30,9 +30,13 @@ public class BotClient extends Client {
     public class BotSocketThread extends SocketThread {
         @Override
         protected void clientMainLoop() throws IOException, ClassNotFoundException {
+            introduceYourself();
+            super.clientMainLoop();
+        }
+
+        private void introduceYourself() {
             sendTextMessage("Hello, there. I'm a bot. I understand the following commands: " +
                     "date, day, month, year, time, hour, minutes, seconds.");
-            super.clientMainLoop();
         }
 
         @Override
@@ -44,6 +48,9 @@ public class BotClient extends Client {
                 return;
             }
             String text = split[1];
+            if (text.equalsIgnoreCase("hey") || text.equalsIgnoreCase("hello") || text.equalsIgnoreCase("hi")) {
+                introduceYourself();
+            }
             String format = null;
             switch (text) {
                 case "date":

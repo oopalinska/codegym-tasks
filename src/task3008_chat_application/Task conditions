@@ -1,0 +1,41 @@
+CHAT APP
+
+Recap:
+• Wrote a text messaging server.
+• Wrote a console-based client that can connect to the server and exchange messages with other chat participants.
+• Created a bot client that can receive requests and send information about the current date and time.
+• Made a chat client with a graphical interface.
+
+Here are some things we might add or improve:
+• Add support for private messages (when a message is sent to a specific participant instead of everyone).
+• Extend the bot's capabilities. Teach it to respond to super simple questions or to make jokes from time to time.
+• Add the ability to transfer files between users.
+• Add a context menu to the GUI-based client, for example, to send a private message to someone from a list of participants.
+• Color the messages in the GUI-based client, depending on the sender.
+• Add the ability for the server to block participants, for example, for offensive language in messages.
+
+Learned how to:
+• Work with sockets.
+• Use serialization and deserialization.
+• Create and synchronize multi-threaded applications, use the volatile modifier, and use classes from the java.util.concurrent library.
+• Apply the MVC pattern.
+• Use inner and nested classes.
+• Work with the Swing library.
+• Use the Calendar and SimpleDateFormat classes.
+
+
+! INSTRUCTIONS how to run !
+
+1. Run the 'Server.main()'.
+1.1 Type a port (usually it is 8080). You should receive the message "Server is running".
+
+2. Run the 'BotClient.main()'.
+2.2 When asked for server address, enter localhost (if your server is your own PC).
+2.3 When asked for server port, enter the same as you entered in 'Server.main()'. In this case, 8080.
+    The message "Connection established. To exit, enter 'exit'." should appear.
+
+3. Run the 'ClientGuiController.main()'.
+3.1 You will be asked again to enter the server address and the server port, which are localhost and 8080 again.
+    Then you will be asked to enter your username.
+
+
