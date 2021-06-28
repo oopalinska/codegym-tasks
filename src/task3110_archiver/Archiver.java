@@ -1,5 +1,7 @@
 package task3110_archiver;
 
+import task3110_archiver.command.ExitCommand;
+
 import java.nio.file.Paths;
 import java.util.Scanner;
 
@@ -13,9 +15,9 @@ public class Archiver {
         final String fileToZip = scanner.nextLine();
         try {
             zipFileManager.createZip(Paths.get(fileToZip));
+            new ExitCommand().execute();
         } catch (Exception e) {
             e.printStackTrace();
         }
-
     }
 }
