@@ -20,6 +20,46 @@ import java.util.zip.ZipOutputStream;
 public class ZipFileManager {
     private Path zipFile;
 
+    public void addFile(Path absolutePath) throws Exception {
+        addFiles(Collections.singletonList(absolutePath));
+    }
+    public void addFiles(List<Path> absolutePathList) throws Exception {
+        if (!Files.isRegularFile(zipFile)) {
+            throw new NoSuchZipFileException();
+        }
+        Path tempFile = Files.createTempFile("", ".tmp");
+        List<Path> localList = new ArrayList<>();
+
+        try (ZipInputStream inputStream = new ZipInputStream(Files.newInputStream(zipFile));
+             ZipOutputStream outputStream = new ZipOutputStream(Files.newOutputStream(tempFile))) {
+            ZipEntry entry = inputStream.getNextEntry();
+            while (entry != null) {
+                Path path = Paths.get(entry.getName());
+                localList.add(path);
+                outputStream.putNextEntry(new ZipEntry(entry.getName()));
+                copyData(inputStream, outputStream);
+                inputStream.closeEntry();
+                outputStream.closeEntry();
+                entry = inputStream.getNextEntry();
+            }
+
+            for (Path file : absolutePathList) {
+                if (Files.isRegularFile(file))
+                {
+                    if (localList.contains(file.getFileName()))
+                        ConsoleHelper.writeMessage(String.format("File '%s' already exists in the archive.", file.toString()));
+                    else {
+                        addNewZipEntry(outputStream, file.getParent(), file.getFileName());
+                        ConsoleHelper.writeMessage(String.format("File '%s' was added to the archive.", file.toString()));
+                    }
+                }
+                else
+                    throw new PathNotFoundException();
+            }
+        }
+        Files.move(tempFile, zipFile, StandardCopyOption.REPLACE_EXISTING);
+    }
+
     public void removeFile(Path path) throws Exception {
         removeFiles(Collections.singletonList(path));
     }
