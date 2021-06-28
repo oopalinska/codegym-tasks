@@ -8,7 +8,10 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
@@ -17,6 +20,33 @@ import java.util.zip.ZipOutputStream;
 public class ZipFileManager {
     private Path zipFile;
 
+    public void removeFile(Path path) throws Exception {
+        removeFiles(Collections.singletonList(path));
+    }
+    public void removeFiles(List<Path> pathList) throws Exception {
+        if (!Files.isRegularFile(zipFile)) {
+            throw new NoSuchZipFileException();
+        }
+        Path tempFile = Files.createTempFile("", ".tmp");
+        try (ZipInputStream inputStream = new ZipInputStream(Files.newInputStream(zipFile));
+             ZipOutputStream outputStream = new ZipOutputStream(Files.newOutputStream(tempFile))) {
+            ZipEntry entry = inputStream.getNextEntry();
+            while (entry != null) {
+                Path path = Paths.get(entry.getName());
+
+                if (!pathList.contains(path)) {
+                    outputStream.putNextEntry(new ZipEntry(entry.getName()));
+                    copyData(inputStream, outputStream);
+                    inputStream.closeEntry();
+                    outputStream.closeEntry();
+                } else {
+                    ConsoleHelper.writeMessage(String.format("File '%s' was removed from the archive.", path.toString()));
+                }
+                entry = inputStream.getNextEntry();
+            }
+        }
+        Files.move(tempFile, zipFile, StandardCopyOption.REPLACE_EXISTING);
+    }
     public void extractAll(Path outputFolder) throws Exception {
         if (!Files.isRegularFile(zipFile)) {
             throw new NoSuchZipFileException();
