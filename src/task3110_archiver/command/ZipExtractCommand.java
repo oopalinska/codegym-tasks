@@ -11,11 +11,11 @@ public class ZipExtractCommand extends ZipCommand {
     @Override
     public void execute() throws Exception {
         try {
-            ConsoleHelper.writeMessage("Unpacking archive.");
+            ConsoleHelper.writeMessage("Unpacking archive...");
 
             ZipFileManager zipFileManager = getZipFileManager();
 
-            ConsoleHelper.writeMessage("Enter the path where the archive will be unpacked:");
+            ConsoleHelper.writeMessage("Please enter the path where the archive will be unpacked:");
             Path destinationPath = Paths.get(ConsoleHelper.readString());
             zipFileManager.extractAll(destinationPath);
 

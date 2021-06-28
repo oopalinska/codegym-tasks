@@ -11,9 +11,9 @@ public class ZipCreateCommand extends ZipCommand {
     @Override
     public void execute() throws Exception {
         try {
-            ConsoleHelper.writeMessage("Creating an archive.");
+            ConsoleHelper.writeMessage("Creating an archive...");
             ZipFileManager zipFileManager = getZipFileManager();
-            ConsoleHelper.writeMessage("Please enter the full path to the file or directory to be zipped");
+            ConsoleHelper.writeMessage("Please enter the full path to the file or directory to be zipped:");
             final Path pathToZip = Paths.get(ConsoleHelper.readString());
             zipFileManager.createZip(pathToZip);
             ConsoleHelper.writeMessage("Archive created.");

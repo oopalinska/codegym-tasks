@@ -1,0 +1,49 @@
+ARCHIVER
+
+At the moment, this archiver program is able to:
+1. Create an archive
+2. Add a file to an archive
+3. Remove a file from an archive
+4. Extract an archive's contents
+5. View an archive's contents
+6. Exit the program
+
+CREATE
+We need to write "0" in the console.
+First, provide the correct path to archive, for example:
+D:\\archive.rar
+If it doesn't exist, it will be created.
+Second, provide the correct full path to the file or directory to be zipped.
+If the archive existed before, all the files that it included will disappear - only the newly added ones will be available.
+
+ADD
+Write "1" in the console.
+First, provide the correct path to archive, for example:
+D:\\archive.rar
+It has to exist, otherwise the command will not work.
+Second, provide the correct full path to the file (not directory) to be added.
+All the files that the archive included before will be saved, together with the newly added ones.
+If the file with the same name existed before, it will not be overridden.
+
+REMOVE
+Write "2" in the console.
+First, provide the correct path to archive, for example:
+D:\\archive.rar
+It has to exist, otherwise the command will not work.
+Second, provide the correct name (not full path!) of a file to be removed.
+
+EXTRACT
+Write "3" in the console.
+First, provide the correct path to archive, for example:
+D:\\archive.rar
+It has to exist, otherwise the command will not work.
+Second, provide the correct full path to your target directory.
+
+VIEW
+Write "4" in the console.
+Provide the correct path to archive, for example:
+D:\\archive.rar
+Contents will be displayed on the console.
+
+EXIT
+Just write "5" in the console.

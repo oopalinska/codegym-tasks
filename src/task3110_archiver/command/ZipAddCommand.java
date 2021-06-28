@@ -11,11 +11,10 @@ public class ZipAddCommand extends ZipCommand{
     @Override
     public void execute() throws Exception {
         try {
-            ConsoleHelper.writeMessage("Unpacking archive.");
-
+            ConsoleHelper.writeMessage("Unpacking archive...");
             ZipFileManager zipFileManager = getZipFileManager();
 
-            ConsoleHelper.writeMessage("Enter the path to the file that you want to add:");
+            ConsoleHelper.writeMessage("Please enter the full path to a file you are adding:");
             Path filePath = Paths.get(ConsoleHelper.readString());
             zipFileManager.addFile(filePath);
 
