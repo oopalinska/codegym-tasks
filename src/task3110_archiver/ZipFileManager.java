@@ -17,6 +17,31 @@ import java.util.zip.ZipOutputStream;
 public class ZipFileManager {
     private Path zipFile;
 
+    public void extractAll(Path outputFolder) throws Exception {
+        if (!Files.isRegularFile(zipFile)) {
+            throw new NoSuchZipFileException();
+        }
+
+        try (ZipInputStream zipInputStream = new ZipInputStream(Files.newInputStream(zipFile))) {
+            if (Files.notExists(outputFolder)) {
+                Files.createDirectories(outputFolder);
+            }
+            ZipEntry zipEntry = zipInputStream.getNextEntry();
+            while (zipEntry != null) {
+                String fileName = zipEntry.getName();
+                Path fileFullName = outputFolder.resolve(fileName);
+                Path parent = fileFullName.getParent();
+                if (Files.notExists(parent)) {
+                    Files.createDirectories(parent);
+                }
+                try (OutputStream outputStream = Files.newOutputStream(fileFullName)) {
+                    copyData(zipInputStream, outputStream);
+                }
+                zipEntry = zipInputStream.getNextEntry();
+            }
+        }
+    }
+
     public List<FileProperties> getFileList() throws Exception {
         if (!Files.isRegularFile(zipFile)) {
             throw new NoSuchZipFileException();
@@ -62,8 +87,10 @@ public class ZipFileManager {
         }
     }
     private void copyData(InputStream in, OutputStream out) throws Exception {
-        while (in.available() > 0) {
-            out.write(in.read());
+        byte[] buffer = new byte[8 * 1024];
+        int len;
+        while ((len = in.read(buffer)) > 0) {
+            out.write(buffer, 0, len);
         }
     }
     public ZipFileManager(final Path zipFile) {
