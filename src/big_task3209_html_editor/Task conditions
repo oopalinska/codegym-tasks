@@ -1,0 +1,5 @@
+HTML EDITOR
+
+Today we'll write an HTML editor with a graphical user interface.
+We'll use Swing to create the GUI.
+And we'll use the MVC pattern as the architectural framework for our application.
