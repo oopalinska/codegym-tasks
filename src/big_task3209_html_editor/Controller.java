@@ -24,4 +24,7 @@ public class Controller {
         view.init();
         controller.init();
     }
+    public HTMLDocument getDocument() {
+        return document;
+    }
 }
