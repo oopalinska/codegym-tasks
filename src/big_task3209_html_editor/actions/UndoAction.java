@@ -14,6 +14,6 @@ public class UndoAction extends AbstractAction {
 
     @Override
     public void actionPerformed(final ActionEvent e) {
-
+        view.undo();
     }
 }
