@@ -37,7 +37,26 @@ public class View extends JFrame implements ActionListener {
     }
     @Override
     public void actionPerformed(final ActionEvent e) {
-
+        String command = e.getActionCommand();
+        switch (command) {
+            case "New":
+                controller.createNewDocument();
+                break;
+            case "Open":
+                controller.openDocument();
+                break;
+            case "Save":
+                controller.saveDocument();
+                break;
+            case "Save as...":
+                controller.saveDocumentAs();
+                break;
+            case "Exit":
+                controller.exit();
+                break;
+            case "About":
+                showAbout();
+        }
     }
     public void initMenuBar() {
         JMenuBar menuBar = new JMenuBar();
@@ -79,7 +98,13 @@ public class View extends JFrame implements ActionListener {
     }
 
     public void selectedTabChanged() {
-
+        if (tabbedPane.getSelectedIndex() == 0) {
+            controller.setPlainText(plainTextPane.getText());
+        }
+        else {
+            plainTextPane.setText(controller.getPlainText());
+        }
+        resetUndo();
     }
 
     public boolean canUndo() {
