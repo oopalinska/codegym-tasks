@@ -1,5 +1,19 @@
 HTML EDITOR
 
-Today we'll write an HTML editor with a graphical user interface.
-We'll use Swing to create the GUI.
-And we'll use the MVC pattern as the architectural framework for our application.
+This task was my first serious attempt to create graphical interface with the Swing library.
+I managed to complete it thanks to detailed step-by-step instructions from CodeGym and I still find understanding
+this code very challenging.
+I have decided to save it here anyway in order to analyze it in the future.
+
+Learned the basics of:
+- Creating applications with a graphical interface.
+- Working with dialog boxes.
+- Using classes from the Swing library.
+- Implementing interaction between program components with the help of events, listeners, and actions.
+- Using the MVC pattern as the architectural framework for applications.
+
+Might improve in the future:
+- Add a toolbar that replicates the functionality of the menu.
+- Add highlighting of HTML tags on the second tab.
+- Add the ability to load a document from the Internet.
+- Expand the editor's capabilities (insert images, links, etc.)
