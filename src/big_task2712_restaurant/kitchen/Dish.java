@@ -1,11 +1,13 @@
 package big_task2712_restaurant.kitchen;
 
 public enum Dish {
-    FISH,
-    STEAK,
-    SOUP,
-    JUICE,
-    WATER;
+    Fish(25),
+    Steak(30),
+    Soup(15),
+    Juice(5),
+    Water(3);
+
+    private int duration;
 
     public static String allDishesToString() {
         StringBuilder result = new StringBuilder();
@@ -18,5 +20,13 @@ public enum Dish {
             }
         }
         return result.toString();
+    }
+
+    public int getDuration() {
+        return duration;
+    }
+
+    Dish(final int duration) {
+        this.duration = duration;
     }
 }

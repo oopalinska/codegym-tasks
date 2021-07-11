@@ -28,5 +28,15 @@ public class Order {
         orderText.append("] from ").append(tablet);
         return orderText.toString();
     }
+    public int getTotalCookingTime() {
+        int cookingTime = 0;
+        for (Dish dish : dishes) {
+            cookingTime += dish.getDuration();
+        }
+        return cookingTime;
+    }
+    public boolean isEmpty() {
+        return dishes.isEmpty();
+    }
 }
 
