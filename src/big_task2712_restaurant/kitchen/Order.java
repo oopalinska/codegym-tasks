@@ -10,7 +10,6 @@ public class Order {
     private final Tablet tablet;
     protected List<Dish> dishes;
 
-
     public Order(final Tablet tablet) throws IOException {
         this.tablet = tablet;
         dishes = ConsoleHelper.getAllDishesForOrder();
