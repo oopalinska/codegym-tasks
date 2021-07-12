@@ -39,4 +39,8 @@ public class OrderReadyEventDataRow implements EventDataRow {
     public int getTime() {
         return cookingTimeSeconds;
     }
+
+    public String getCookName() {
+        return cookName;
+    }
 }
