@@ -29,4 +29,14 @@ public class OrderReadyEventDataRow implements EventDataRow {
     public EventType getType() {
         return EventType.ORDER_READY;
     }
+
+    @Override
+    public Date getDate() {
+        return currentDate;
+    }
+
+    @Override
+    public int getTime() {
+        return cookingTimeSeconds;
+    }
 }
