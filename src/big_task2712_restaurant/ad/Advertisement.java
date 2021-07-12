@@ -6,6 +6,14 @@ public class Advertisement {
     private long amountPaid;
     private int impressionsRemaining;
     private int duration;
+    private long amountPerImpression;
+
+    public void revalidate() {
+        if (impressionsRemaining <= 0) {
+            throw new UnsupportedOperationException();
+        }
+        impressionsRemaining--;
+    }
 
     public Advertisement(final Object content,
                          final String name,
@@ -17,5 +25,18 @@ public class Advertisement {
         this.amountPaid = amountPaid;
         this.impressionsRemaining = impressionsRemaining;
         this.duration = duration;
+        this.amountPerImpression = amountPaid / impressionsRemaining;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getDuration() {
+        return duration;
+    }
+
+    public long getAmountPerImpression() {
+        return amountPerImpression;
     }
 }

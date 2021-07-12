@@ -1,5 +1,7 @@
 package big_task2712_restaurant;
 
+import big_task2712_restaurant.ad.AdvertisementManager;
+import big_task2712_restaurant.ad.NoVideoAvailableException;
 import big_task2712_restaurant.kitchen.Order;
 
 import java.io.IOException;
@@ -15,7 +17,7 @@ public class Tablet extends Observable {
         this.number = number;
     }
     public Order createOrder() {
-        Order order;
+        Order order = null;
         try {
             order = new Order(this);
             if(order.isEmpty()) {
@@ -23,9 +25,13 @@ public class Tablet extends Observable {
             }
             setChanged();
             notifyObservers(order);
+            AdvertisementManager manager = new AdvertisementManager(order.getTotalCookingTime() * 60);
+            manager.processVideos();
         } catch (IOException e) {
             logger.log(Level.SEVERE, "The console is unavailable.");
             return null;
+        } catch (NoVideoAvailableException e) {
+            logger.log(Level.INFO, "No video is available for the following order: " + order);
         }
         return order;
     }

@@ -15,8 +15,8 @@ public class ConsoleHelper {
         System.out.println(message);
     }
     public static String readString() throws IOException {
-                return reader.readLine();
-        }
+        return reader.readLine();
+    }
     public static List<Dish> getAllDishesForOrder() throws IOException {
         List<Dish> listToOrder = new ArrayList<>();
         writeMessage("Please select the dish or write EXIT: ");
@@ -27,7 +27,7 @@ public class ConsoleHelper {
                 break;
             }
             try {
-                listToOrder.add(Dish.valueOf(readString.toUpperCase()));
+                listToOrder.add(Dish.valueOf(readString));
                 writeMessage(readString + " has been added to your order.");
             } catch (IllegalArgumentException e) {
                 writeMessage("There is no such dish... Try again.");
