@@ -1,4 +1,8 @@
 package big_task2712_restaurant.ad;
+
+import big_task2712_restaurant.statistics.StatisticsManager;
+import big_task2712_restaurant.statistics.event.VideosSelectedEventDataRow;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -21,6 +25,10 @@ public class AdvertisementManager {
         }
         this.totalTimeSecondsLeft = Integer.MAX_VALUE;
         obtainOptimalVideoSet(new ArrayList<>(), timeSeconds, 0L);
+        StatisticsManager.getInstance().record(new VideosSelectedEventDataRow(
+                optimalVideoSet,
+                maxAmount,
+                totalTimeSecondsLeft));
         displayAdvertisement();
     }
     private void obtainOptimalVideoSet(List<Advertisement> videos, int currentTimeSecondsLeft, long currentAmount) {
@@ -62,7 +70,7 @@ public class AdvertisementManager {
             throw new NoVideoAvailableException();
         }
 
-        optimalVideoSet.sort((o1, o2) -> {
+        Collections.sort(optimalVideoSet, (o1, o2) -> {
             long l = o2.getAmountPerImpression() - o1.getAmountPerImpression();
             return (int) (l != 0 ? l : o2.getDuration() - o1.getDuration());
         });
