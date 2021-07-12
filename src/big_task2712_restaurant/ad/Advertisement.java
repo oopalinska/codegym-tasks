@@ -25,7 +25,9 @@ public class Advertisement {
         this.amountPaid = amountPaid;
         this.impressionsRemaining = impressionsRemaining;
         this.duration = duration;
-        this.amountPerImpression = amountPaid / impressionsRemaining;
+        if (impressionsRemaining > 0) {
+            amountPerImpression = amountPaid / impressionsRemaining;
+        }
     }
 
     public String getName() {
@@ -38,5 +40,8 @@ public class Advertisement {
 
     public long getAmountPerImpression() {
         return amountPerImpression;
+    }
+    public boolean isActive() {
+        return impressionsRemaining > 0;
     }
 }
