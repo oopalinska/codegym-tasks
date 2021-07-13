@@ -1,0 +1,24 @@
+RESTAURANT MANAGER APP (+ ELECTRONIC MENU)
+
+A program to automate some tasks in the restaurant:
+1) Each table has a tablet that can be used to place orders.
+2) While an order is being prepared, the tablet shows advertisements.
+3) At the end of the business day, various statistics can be reviewed:
+- cook utilization,
+- total revenue from orders,
+- total revenue from advertisement impressions.
+
+FUTURE TO-DO:
+1. Threads usually use the ThreadLocalRandom class instead of Random.
+   Refactor the code: replace Random with ThreadLocalRandom.
+2. Make Waiter a task so that it works like a thread (remove Observer). Make a queue of prepared orders.
+   Have the waiter take orders from it and carry them out to the tables.
+3. Write a NoVideosAvailableEventDataRow event in the event log when it is not possible to select a video.
+   Pass this event to the manager.
+4. Write a UI, for example, using Swing.
+
+What I've learned by completing this task:
+1. Figured out the Observer pattern.
+2. Practiced ability to use recursion.
+3. Got acquainted with a way to implement statistics.
+4. Worked on how to break a task into subtasks.
