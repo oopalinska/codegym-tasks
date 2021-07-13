@@ -68,6 +68,10 @@ public class StatisticsManager {
         cooks.add(cook);
     }
 
+    public Set<Cook> getCooks() {
+        return cooks;
+    }
+
     private class StatisticsStorage {
 
         private Map<EventType, List<EventDataRow>> storage = new HashMap<>();
