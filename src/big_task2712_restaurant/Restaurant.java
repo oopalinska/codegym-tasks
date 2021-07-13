@@ -4,6 +4,8 @@ import big_task2712_restaurant.kitchen.Cook;
 import big_task2712_restaurant.kitchen.Waiter;
 
 public class Restaurant {
+    private static final int ORDER_CREATION_INTERVAL = 100;
+
     public static void main(String[] args) {
         Tablet tablet = new Tablet(1);
         Cook cook = new Cook("Nusret");

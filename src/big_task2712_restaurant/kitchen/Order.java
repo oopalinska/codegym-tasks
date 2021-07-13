@@ -12,7 +12,7 @@ public class Order {
 
     public Order(final Tablet tablet) throws IOException {
         this.tablet = tablet;
-        dishes = ConsoleHelper.getAllDishesForOrder();
+        initDishes();
     }
 
     @Override
@@ -34,6 +34,9 @@ public class Order {
             cookingTime += dish.getDuration();
         }
         return cookingTime;
+    }
+    protected void initDishes() throws IOException {
+        dishes = ConsoleHelper.getAllDishesForOrder();
     }
     public boolean isEmpty() {
         return dishes.isEmpty();
