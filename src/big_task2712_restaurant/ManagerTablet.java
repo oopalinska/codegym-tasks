@@ -1,10 +1,10 @@
 package big_task2712_restaurant;
 
+import big_task2712_restaurant.ad.Advertisement;
+import big_task2712_restaurant.ad.StatisticsAdvertisementManager;
 import big_task2712_restaurant.statistics.StatisticsManager;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Map;
+import java.util.*;
 
 public class ManagerTablet {
     private StatisticsManager statisticsManager = StatisticsManager.getInstance();
@@ -34,9 +34,17 @@ public class ManagerTablet {
         }
     }
     public void printActiveVideoSet() {
-
+        List<Advertisement> result = StatisticsAdvertisementManager.getInstance().getListOfCommercials(true);
+        result.sort(Comparator.comparing(Advertisement::getName));
+        for (Advertisement advert : result) {
+            ConsoleHelper.writeMessage(advert.getName() + " - " + advert.getImpressionsRemaining());
+        }
     }
     public void printArchivedVideoSet() {
-
+        List<Advertisement> result = StatisticsAdvertisementManager.getInstance().getListOfCommercials(false);
+        result.sort(Comparator.comparing(o -> o.getName().toLowerCase()));
+        for (Advertisement advert : result) {
+            ConsoleHelper.writeMessage(advert.getName());
+        }
     }
 }

@@ -44,4 +44,7 @@ public class Advertisement {
     public boolean isActive() {
         return impressionsRemaining > 0;
     }
+    public int getImpressionsRemaining() {
+        return impressionsRemaining;
+    }
 }

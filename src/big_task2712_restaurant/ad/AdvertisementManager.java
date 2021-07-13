@@ -4,7 +4,6 @@ import big_task2712_restaurant.statistics.StatisticsManager;
 import big_task2712_restaurant.statistics.event.VideosSelectedEventDataRow;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class AdvertisementManager {
@@ -70,7 +69,7 @@ public class AdvertisementManager {
             throw new NoVideoAvailableException();
         }
 
-        Collections.sort(optimalVideoSet, (o1, o2) -> {
+        optimalVideoSet.sort((o1, o2) -> {
             long l = o2.getAmountPerImpression() - o1.getAmountPerImpression();
             return (int) (l != 0 ? l : o2.getDuration() - o1.getDuration());
         });
