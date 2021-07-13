@@ -59,17 +59,8 @@ public class StatisticsManager {
 
         return result;
     }
-
     public void record(EventDataRow data) {
         statisticsStorage.put(data);
-    }
-
-    public void register(Cook cook) {
-        cooks.add(cook);
-    }
-
-    public Set<Cook> getCooks() {
-        return cooks;
     }
 
     private class StatisticsStorage {

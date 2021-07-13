@@ -6,30 +6,29 @@ import big_task2712_restaurant.kitchen.Order;
 import big_task2712_restaurant.kitchen.TestOrder;
 
 import java.io.IOException;
-import java.util.Observable;
+import java.util.concurrent.LinkedBlockingQueue;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class Tablet extends Observable {
+public class Tablet {
     private final int number;
     private static Logger logger = Logger.getLogger(Tablet.class.getName());
+    private LinkedBlockingQueue<Order> queue;
 
     public Tablet(final int number) {
         this.number = number;
+        setQueue(Restaurant.getOrderQueue());
     }
-    public Order createOrder() {
+    public void createOrder() {
         Order order = null;
         try {
             order = new Order(this);
-            final Order order1 = prepareOrder(order);
-            if (order1 != null) return order1;
+            prepareOrder(order);
         } catch (IOException e) {
             logger.log(Level.SEVERE, "The console is unavailable.");
-            return null;
         } catch (NoVideoAvailableException e) {
             logger.log(Level.INFO, "No video is available for the following order: " + order);
         }
-        return order;
     }
 
     public void createTestOrder() {
@@ -50,15 +49,22 @@ public class Tablet extends Observable {
         }
         AdvertisementManager manager = new AdvertisementManager(order.getTotalCookingTime() * 60);
         manager.processVideos();
-        setChanged();
-        notifyObservers(order);
-        return null;
+        try {
+            queue.put(order);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return order;
     }
     @Override
     public String toString() {
         return "Tablet{" +
                 "number=" + number +
                 '}';
+    }
+
+    public void setQueue(final LinkedBlockingQueue<Order> queue) {
+        this.queue = queue;
     }
 }
 

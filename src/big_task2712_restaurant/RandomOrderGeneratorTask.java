@@ -17,11 +17,11 @@ public class RandomOrderGeneratorTask implements Runnable {
             while(true) {
                 int random = (int) (Math.random() * tablets.size());
                 Tablet tablet = tablets.get(random);
-                tablet.createOrder();
+                tablet. createTestOrder();
                 Thread.sleep(interval);
             }
         } catch (InterruptedException e) {
-            e.printStackTrace();
+            ConsoleHelper.writeMessage("INTERRUPTED! BUT THAT'S FINE :)");
         }
 
     }
