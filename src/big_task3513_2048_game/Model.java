@@ -5,6 +5,8 @@ import java.util.ArrayList;
 public class Model {
     private static final int FIELD_WIDTH = 4;
     private Tile[][] gameTiles;
+    int score = 0;
+    int maxTile = 0;
 
     public Model() {
         resetGameTiles();
@@ -36,5 +38,43 @@ public class Model {
                 }
             }
         return resultList;
+    }
+
+    private void consolidateTiles(Tile[] tiles) {
+        int insertPosition = 0;
+        for (int i = 0; i < tiles.length; i++) {
+            if (!tiles[i].isEmpty()) {
+                if (insertPosition != i) {
+                    tiles[insertPosition] = tiles[i];
+                    tiles[i] = new Tile();
+                }
+                insertPosition++;
+            }
+        }
+    }
+
+    private void mergeTiles(Tile[] tiles) {
+        ArrayList<Tile> tilesList = new ArrayList<>();
+        for (int i = 0; i < tiles.length-1; i++) {
+            if (tiles[i].isEmpty()) {
+                continue;
+            }
+            int currentTileValue = tiles[i].value;
+            if (currentTileValue == tiles[i + 1].value) {
+                currentTileValue = 2 * tiles[i].value;
+                score += currentTileValue;
+                if (currentTileValue > maxTile) {
+                    maxTile = currentTileValue;
+                }
+                tilesList.add(new Tile(currentTileValue));
+                tiles[i + 1].value = 0;
+            } else {
+                tilesList.add(new Tile(currentTileValue));
+            }
+            tiles[i].value = 0;
+        }
+        for (int i = 0; i < tilesList.size(); i++) {
+            tiles[i] = tilesList.get(i);
+        }
     }
 }
