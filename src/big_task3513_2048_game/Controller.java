@@ -1,5 +1,6 @@
 package big_task3513_2048_game;
 
+import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
@@ -19,6 +20,10 @@ public class Controller extends KeyAdapter {
 
     public int getScore() {
         return model.score;
+    }
+
+    public View getView() {
+        return view;
     }
 
     public void resetGame() {
