@@ -131,4 +131,25 @@ public class Model {
         gameTiles = rotateClockwise(gameTiles);
         gameTiles = rotateClockwise(gameTiles);
     }
+
+    public Tile[][] getGameTiles() {
+        return gameTiles;
+    }
+
+    boolean canMove() {
+        if (getEmptyTiles().size() != 0) {
+            return true;
+        }
+
+        for (int i = 0; i < FIELD_WIDTH; i++) {
+            for (int j = 0; j < FIELD_WIDTH; j++) {
+                Tile tile = gameTiles[i][j];
+                if ((i < FIELD_WIDTH - 1 && tile.value == gameTiles[i + 1][j].value)
+                        || ((j < FIELD_WIDTH - 1) && tile.value == gameTiles[i][j + 1].value)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
 }
