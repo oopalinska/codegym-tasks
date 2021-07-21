@@ -1,6 +1,7 @@
 package big_task3513_2048_game;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 
 public class Model {
     private static final int FIELD_WIDTH = 4;
@@ -25,10 +26,13 @@ public class Model {
 
     private void addTile() {
         ArrayList<Tile> emptyTiles = getEmptyTiles();
-        int randomTile = (int) (emptyTiles.size() * Math.random());
-        int newTileWeight = Math.random() < 0.9 ? 2 : 4;
-        emptyTiles.get(randomTile).value = newTileWeight;
+        if (!emptyTiles.isEmpty()) {
+            int randomTile = (int) (emptyTiles.size() * Math.random());
+            int newTileWeight = Math.random() < 0.9 ? 2 : 4;
+            emptyTiles.get(randomTile).value = newTileWeight;
+        }
     }
+
     private ArrayList<Tile> getEmptyTiles() {
         ArrayList<Tile> resultList = new ArrayList<>();
         for (int i = 0; i < FIELD_WIDTH; i++)
@@ -40,41 +44,59 @@ public class Model {
         return resultList;
     }
 
-    private void consolidateTiles(Tile[] tiles) {
+    private boolean consolidateTiles(Tile[] tiles) {
+        boolean result = false;
         int insertPosition = 0;
         for (int i = 0; i < tiles.length; i++) {
             if (!tiles[i].isEmpty()) {
                 if (insertPosition != i) {
                     tiles[insertPosition] = tiles[i];
                     tiles[i] = new Tile();
+                    result = true;
                 }
                 insertPosition++;
             }
         }
+        return result;
     }
 
-    private void mergeTiles(Tile[] tiles) {
-        ArrayList<Tile> tilesList = new ArrayList<>();
-        for (int i = 0; i < tiles.length-1; i++) {
+    private boolean mergeTiles(Tile[] tiles) {
+        boolean result = false;
+        LinkedList<Tile> tilesList = new LinkedList<>();
+        for (int i = 0; i < FIELD_WIDTH; i++) {
             if (tiles[i].isEmpty()) {
                 continue;
             }
-            int currentTileValue = tiles[i].value;
-            if (currentTileValue == tiles[i + 1].value) {
-                currentTileValue = 2 * tiles[i].value;
-                score += currentTileValue;
-                if (currentTileValue > maxTile) {
-                    maxTile = currentTileValue;
+
+            if (i < FIELD_WIDTH - 1 && tiles[i].value == tiles[i + 1].value) {
+                int updatedValue = tiles[i].value * 2;
+                if (updatedValue > maxTile) {
+                    maxTile = updatedValue;
                 }
-                tilesList.add(new Tile(currentTileValue));
+                score += updatedValue;
+                tilesList.addLast(new Tile(updatedValue));
                 tiles[i + 1].value = 0;
+                result = true;
             } else {
-                tilesList.add(new Tile(currentTileValue));
+                tilesList.addLast(new Tile(tiles[i].value));
             }
             tiles[i].value = 0;
         }
         for (int i = 0; i < tilesList.size(); i++) {
             tiles[i] = tilesList.get(i);
+        }
+        return result;
+    }
+
+    public void left() {
+        boolean shouldAdd = false;
+        for (int i = 0; i < FIELD_WIDTH; i++) {
+            if (consolidateTiles(gameTiles[i]) | mergeTiles(gameTiles[i])) {
+                shouldAdd = true;
+            }
+        }
+        if (shouldAdd) {
+            addTile();
         }
     }
 }
