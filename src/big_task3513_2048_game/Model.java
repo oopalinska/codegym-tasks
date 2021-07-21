@@ -2,12 +2,16 @@ package big_task3513_2048_game;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.Stack;
 
 public class Model {
     private static final int FIELD_WIDTH = 4;
     private Tile[][] gameTiles;
     int score = 0;
     int maxTile = 0;
+    private final Stack<Tile[][]> previousStates = new Stack<>();
+    private final Stack<Integer> previousScores = new Stack<>();
+    private boolean isSaveNeeded = true;
 
     public Model() {
         resetGameTiles();
@@ -151,5 +155,22 @@ public class Model {
             }
         }
         return false;
+    }
+    private void saveState(Tile[][] tiles) {
+        Tile[][] tempTiles = new Tile[FIELD_WIDTH][FIELD_WIDTH];
+        for (int i = 0; i < FIELD_WIDTH; i++) {
+            for (int j = 0; j < FIELD_WIDTH; j++) {
+                tempTiles[i][j] = new Tile(tiles[i][j].value);
+            }
+        }
+        previousStates.push(tempTiles);
+        previousScores.push(score);
+        isSaveNeeded = false;
+    }
+    public void rollback() {
+        if (!previousStates.isEmpty() && !previousScores.isEmpty()) {
+            gameTiles = previousStates.pop();
+            score = previousScores.pop();
+        }
     }
 }

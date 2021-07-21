@@ -8,7 +8,7 @@ import java.awt.*;
 public class View extends JPanel {
     private static final Color BG_COLOR = new Color(0xbbada0);
     private static final String FONT_NAME = "Arial";
-    private static final int TILE_SIZE = 96;
+    private static final int TILE_SIZE = 94;
     private static final int TILE_MARGIN = 12;
 
     private Controller controller;
@@ -33,7 +33,7 @@ public class View extends JPanel {
             }
         }
 
-        g.drawString("Score: " + controller.getScore(), 140, 465);
+        g.drawString("Score: " + controller.getScore(), 140, 455);
 
         if (isGameWon) {
             JOptionPane.showMessageDialog(this, "You won!");
