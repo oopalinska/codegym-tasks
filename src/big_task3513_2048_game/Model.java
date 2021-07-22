@@ -102,6 +102,9 @@ public class Model {
         return result;
     }
     public void left() {
+        if (isSaveNeeded) {
+            saveState(gameTiles);
+        }
         boolean shouldAdd = false;
         for (int i = 0; i < FIELD_WIDTH; i++) {
             if (consolidateTiles(gameTiles[i]) | mergeTiles(gameTiles[i])) {
@@ -111,8 +114,10 @@ public class Model {
         if (shouldAdd) {
             addTile();
         }
+        isSaveNeeded = false;
     }
     public void right() {
+        saveState(gameTiles);
         gameTiles = rotateClockwise(gameTiles);
         gameTiles = rotateClockwise(gameTiles);
         left();
@@ -121,6 +126,7 @@ public class Model {
     }
 
     public void up() {
+        saveState(gameTiles);
         gameTiles = rotateClockwise(gameTiles);
         gameTiles = rotateClockwise(gameTiles);
         gameTiles = rotateClockwise(gameTiles);
@@ -129,6 +135,7 @@ public class Model {
     }
 
     public void down() {
+        saveState(gameTiles);
         gameTiles = rotateClockwise(gameTiles);
         left();
         gameTiles = rotateClockwise(gameTiles);

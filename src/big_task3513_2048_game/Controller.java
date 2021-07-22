@@ -1,6 +1,5 @@
 package big_task3513_2048_game;
 
-import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
@@ -55,6 +54,8 @@ public class Controller extends KeyAdapter {
                 case KeyEvent.VK_UP:
                     model.up();
                     break;
+                case KeyEvent.VK_Z:
+                    model.rollback();
             }
         }
         if (model.maxTile == WINNING_TILE) {
