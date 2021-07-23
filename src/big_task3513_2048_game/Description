@@ -1,0 +1,12 @@
+2048
+
+This is the Java implementation of the game 2048, implemented based on MVC pattern, with the View class (Swing)
+copied from CodeGym. A little instruction for playing the game:
+
+1. Run through the Main class.
+2. Make your own moves by using the arrows.
+3. Undo moves by pressing Z.
+4. Make a random move by pressing R.
+5. Make an auto move (merging the most tiles and giving the best score) by pressing A.
+
+Enjoy :)
