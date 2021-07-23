@@ -58,6 +58,8 @@ public class Controller extends KeyAdapter {
                     model.rollback();
                 case KeyEvent.VK_R:
                     model.randomMove();
+                case KeyEvent.VK_A:
+                    model.autoMove();
             }
         }
         if (model.maxTile == WINNING_TILE) {

@@ -1,8 +1,6 @@
 package big_task3513_2048_game;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.Stack;
+import java.util.*;
 
 public class Model {
     private static final int FIELD_WIDTH = 4;
@@ -215,5 +213,15 @@ public class Model {
         }
         rollback();
         return moveFitness;
+    }
+    public void autoMove() {
+        PriorityQueue<MoveFitness> moves = new PriorityQueue<>(4, Collections.reverseOrder());
+        moves.add(getMoveFitness(this::left));
+        moves.add(getMoveFitness(this::up));
+        moves.add(getMoveFitness(this::right));
+        moves.add(getMoveFitness(this::down));
+
+        moves.peek().getMove().move();
+
     }
 }
