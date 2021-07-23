@@ -11,7 +11,7 @@ import java.rmi.server.UnicastRemoteObject;
 /*
 Toward an RMI server
 
-In the "Task conditions" file I added my step-by-step instruction how to implement an RMI.
+In the "Description" file I added my step-by-step instruction how to implement an RMI.
 */
 
 public class Solution {
