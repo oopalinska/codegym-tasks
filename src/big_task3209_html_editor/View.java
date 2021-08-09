@@ -72,10 +72,10 @@ public class View extends JFrame implements ActionListener {
     public void initEditor() {
         htmlTextPane.setContentType("text/html");
         JScrollPane htmlScrollPane = new JScrollPane(htmlTextPane);
-        tabbedPane.addTab("HTML", htmlScrollPane);
+        tabbedPane.addTab("Text", htmlScrollPane);
 
         JScrollPane plainScrollPane = new JScrollPane(plainTextPane);
-        tabbedPane.addTab("Text", plainScrollPane);
+        tabbedPane.addTab("HTML", plainScrollPane);
 
         tabbedPane.setPreferredSize(new Dimension(300,300));
 
