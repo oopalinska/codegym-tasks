@@ -1,5 +1,7 @@
 package big_task2810_aggregator.vo;
 
+import java.util.Objects;
+
 public class JobPosting {
     private String title;
     private String city;
@@ -45,5 +47,18 @@ public class JobPosting {
 
     public void setUrl(final String url) {
         this.url = url;
+    }
+
+    @Override
+    public boolean equals(final Object o) {
+        if (this == o) return true;
+        if (!(o instanceof JobPosting)) return false;
+        final JobPosting that = (JobPosting) o;
+        return Objects.equals(title, that.title) && Objects.equals(city, that.city) && Objects.equals(companyName, that.companyName) && Objects.equals(websiteName, that.websiteName) && Objects.equals(url, that.url);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(title, city, companyName, websiteName, url);
     }
 }
