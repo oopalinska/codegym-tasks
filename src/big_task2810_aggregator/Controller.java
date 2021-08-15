@@ -1,34 +1,17 @@
 package big_task2810_aggregator;
 
-import big_task2810_aggregator.model.Provider;
-import big_task2810_aggregator.vo.JobPosting;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import big_task2810_aggregator.model.Model;
 
 public class Controller {
-    private Provider[] providers;
+    private Model model;
 
-    public Controller(Provider... providers) {
-        if (providers.length == 0) {
+    public Controller(final Model model) {
+        if (model == null) {
             throw new IllegalArgumentException();
         }
-        this.providers = providers;
+        this.model = model;
     }
-
-    @Override
-    public String toString() {
-        return "Controller{" +
-                "providers=" + Arrays.toString(providers) +
-                '}';
-    }
-
-    public void scan() {
-        List<JobPosting> vacancies = new ArrayList<>();
-        for (Provider provider : providers) {
-            vacancies.addAll(provider.getJavaJobPostings("MyTown"));
-        }
-        System.out.println(vacancies.size());
+    public void onCitySelected(String cityName) {
+        model.selectCity(cityName);
     }
 }
