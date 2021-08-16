@@ -56,5 +56,22 @@ public class ConsoleHelper {
             return false;
         }
     }
+
+    public static Operation requestOperation() {
+        writeMessage("Please choose the operation you want to perform (choose one of the numbers):\n" +
+                "1 = INFO \n" +
+                "2 = DEPOSIT \n" +
+                "3 = WITHDRAW \n" +
+                "4 = EXIT");
+        int number;
+        while (true) {
+            try {
+                number = Integer.parseInt(readString().trim());
+                return Operation.getAllowableOperationByOrdinal(number);
+            } catch (IllegalArgumentException e) {
+                writeMessage("Invalid input. Try again...");
+            }
+        }
+    }
 }
 
