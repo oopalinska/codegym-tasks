@@ -11,5 +11,6 @@ public class CashMachine {
         int count = Integer.parseInt(input[1]);
         CurrencyManipulator manipulator = CurrencyManipulatorFactory.getManipulatorByCurrencyCode(currencyCode);
         manipulator.addAmount(denomination, count);
+        ConsoleHelper.writeMessage(String.format("Total amount for %s is: %d", currencyCode, manipulator.getTotalAmount()));
     }
 }
