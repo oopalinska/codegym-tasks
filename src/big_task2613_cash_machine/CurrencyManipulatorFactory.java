@@ -1,5 +1,6 @@
 package big_task2613_cash_machine;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -15,5 +16,8 @@ public class CurrencyManipulatorFactory {
             map.put(currencyUpper, new CurrencyManipulator(currencyUpper));
         }
         return map.get(currencyUpper);
+    }
+    public static Collection<CurrencyManipulator> getAllCurrencyManipulators() {
+        return map.values();
     }
 }

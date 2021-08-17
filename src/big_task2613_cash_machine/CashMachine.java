@@ -1,16 +1,16 @@
 package big_task2613_cash_machine;
 
+import big_task2613_cash_machine.command.CommandExecutor;
+
 import java.util.Locale;
 
 public class CashMachine {
     public static void main(String[] args) {
         Locale.setDefault(Locale.ENGLISH);
-        String currencyCode = ConsoleHelper.requestCurrencyCode();
-        String[] input = ConsoleHelper.getTwoValidNumbers(currencyCode);
-        int denomination = Integer.parseInt(input[0]);
-        int count = Integer.parseInt(input[1]);
-        CurrencyManipulator manipulator = CurrencyManipulatorFactory.getManipulatorByCurrencyCode(currencyCode);
-        manipulator.addAmount(denomination, count);
-        ConsoleHelper.writeMessage(String.format("Total amount for %s is: %d", currencyCode, manipulator.getTotalAmount()));
+        Operation operation;
+        do {
+            operation = ConsoleHelper.requestOperation();
+            CommandExecutor.execute(operation);
+        } while (operation != Operation.EXIT);
     }
 }
