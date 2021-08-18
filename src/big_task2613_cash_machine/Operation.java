@@ -1,6 +1,7 @@
 package big_task2613_cash_machine;
 
 public enum Operation {
+    LOGIN,
     INFO,
     DEPOSIT,
     WITHDRAW,
@@ -21,3 +22,4 @@ public enum Operation {
         }
     }
 }
+

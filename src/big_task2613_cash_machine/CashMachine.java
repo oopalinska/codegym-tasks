@@ -11,6 +11,7 @@ public class CashMachine {
         try {
             Operation operation;
             do {
+                CommandExecutor.execute(Operation.LOGIN);
                 operation = ConsoleHelper.requestOperation();
                 CommandExecutor.execute(operation);
             } while (operation != Operation.EXIT);
