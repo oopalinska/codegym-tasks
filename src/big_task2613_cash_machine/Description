@@ -1,0 +1,17 @@
+SIMPLE CASH MACHINE
+
+This console app supports the following operations:
+- deposit money
+- withdraw money
+- show the status of the ATM (info)
+
+The cash machine also supports multiple currencies.
+It operates using the banknotes we put into it.
+If there are insufficient banknotes to make a withdrawal, then the user is being informed.
+The basic corner cases are handled.
+
+Before using this cash machine, user sign in is necessary:
+- to make the simplest possible version of ATM, card number and PIN are hardcoded
+
+Card number: 123456789012
+PIN: 1234
