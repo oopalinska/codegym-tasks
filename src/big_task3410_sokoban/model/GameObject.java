@@ -9,8 +9,6 @@ public abstract class GameObject {
     int width;
     int height;
 
-    public abstract void draw(Graphics graphics);
-
     public GameObject(final int x, final int y) {
         this.x = x;
         this.y = y;
@@ -56,4 +54,6 @@ public abstract class GameObject {
     public void setHeight(final int height) {
         this.height = height;
     }
+
+    public abstract void draw(Graphics graphics);
 }
