@@ -1,6 +1,7 @@
 package big_task3410_sokoban.controller;
 
 import big_task3410_sokoban.model.Direction;
+import big_task3410_sokoban.model.GameObjects;
 import big_task3410_sokoban.model.Model;
 import big_task3410_sokoban.view.View;
 
@@ -12,6 +13,7 @@ public class Controller implements EventListener {
         this.view = new View(this);
         this.model = new Model();
         view.init();
+        model.restart();
     }
 
     public static void main(String[] args) {
@@ -36,5 +38,9 @@ public class Controller implements EventListener {
     @Override
     public void levelCompleted(final int level) {
 
+    }
+
+    public GameObjects getGameObjects() {
+        return model.getGameObjects();
     }
 }
