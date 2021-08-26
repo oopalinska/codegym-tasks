@@ -1,6 +1,7 @@
 package big_task3410_sokoban.view;
 
 import big_task3410_sokoban.controller.Controller;
+import big_task3410_sokoban.controller.EventListener;
 
 import javax.swing.*;
 
@@ -10,6 +11,10 @@ public class View extends JFrame {
 
     public View(Controller controller) {
         this.controller = controller;
+    }
+
+    public void setEventListener(EventListener eventListener) {
+        board.setEventListener(eventListener);
     }
 
     public void init() {
@@ -23,4 +28,3 @@ public class View extends JFrame {
         setVisible(true);
     }
 }
-
