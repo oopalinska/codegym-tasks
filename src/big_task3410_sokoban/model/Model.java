@@ -39,5 +39,8 @@ public class Model {
     public void restartLevel(final int level) {
         gameObjects = levelLoader.getLevel(level);
     }
-}
 
+    public void move(final Direction direction) {
+
+    }
+}
