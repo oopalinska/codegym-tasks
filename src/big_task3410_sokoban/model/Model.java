@@ -73,4 +73,21 @@ public class Model {
         }
         return false;
     }
+
+    public void checkCompletion() {
+        int storageLocationsCount = gameObjects.getStorageLocations().size();
+        int busyStorageLocationsCount = 0;
+
+        for (StorageLocation storageLocation : gameObjects.getStorageLocations()) {
+            for (Box box : gameObjects.getBoxes()) {
+                if (storageLocation.getX() == box.getX() && storageLocation.getY() == box.getY()) {
+                    busyStorageLocationsCount++;
+                }
+            }
+        }
+
+        if (storageLocationsCount == busyStorageLocationsCount) {
+            eventListener.levelCompleted(currentLevel);
+        }
+    }
 }
