@@ -12,7 +12,7 @@ public class StorageLocation extends GameObject {
 
     @Override
     public void draw(final Graphics graphics) {
-        graphics.setColor(Color.RED);
+        graphics.setColor(Color.BLUE);
         graphics.drawOval(x - width / 2, y - height / 2, width, height);
     }
 }

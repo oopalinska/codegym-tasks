@@ -43,12 +43,22 @@ public class Model {
     }
 
     public void move(final Direction direction) {
+        if (checkWallCollision(gameObjects.getPlayer(), direction)) {
+            return;
+        }
+        if (checkBoxCollisionAndMoveIfAvailable(direction)) {
+            return;
+        }
+        int dx = direction == Direction.LEFT ? -BOARD_CELL_SIZE : (direction == Direction.RIGHT ? BOARD_CELL_SIZE : 0);
+        int dy = direction == Direction.UP ? -BOARD_CELL_SIZE : (direction == Direction.DOWN ? BOARD_CELL_SIZE : 0);
+        gameObjects.getPlayer().move(dx, dy);
 
+        checkCompletion();
     }
 
     public boolean checkWallCollision(CollisionObject gameObject, Direction direction) {
         for (Wall wall : gameObjects.getWalls()) {
-            if (wall.isCollision(gameObject, direction)) {
+            if (gameObject.isCollision(wall, direction)) {
                 return true;
             }
         }
@@ -62,14 +72,14 @@ public class Model {
                     if (!nextBox.equals(box) && box.isCollision(nextBox, direction)) {
                         return true;
                     }
+                    if (checkWallCollision(box, direction)) {
+                        return true;
+                    }
                 }
-                if (checkWallCollision(box, direction)) {
-                    return true;
-                }
+                int dx = direction == Direction.LEFT ? -BOARD_CELL_SIZE : (direction == Direction.RIGHT ? BOARD_CELL_SIZE : 0);
+                int dy = direction == Direction.UP ? -BOARD_CELL_SIZE : (direction == Direction.DOWN ? BOARD_CELL_SIZE : 0);
+                box.move(dx, dy);
             }
-            int dx = direction == Direction.LEFT ? -BOARD_CELL_SIZE : (direction == Direction.RIGHT ? BOARD_CELL_SIZE : 0);
-            int dy = direction == Direction.UP ? -BOARD_CELL_SIZE : (direction == Direction.DOWN ? BOARD_CELL_SIZE : 0);
-            box.move(dx, dy);
         }
         return false;
     }
