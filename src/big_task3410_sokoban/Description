@@ -1,0 +1,10 @@
+SOKOBAN
+
+Simple version of the famous game - https://sokoban.info/
+
+We are moving the Sokoban using the keyboard arrows and restarting the game by pressing "r".
+
+The user interface is implemented with Swing and the levels are being kept in levels.txt file,
+the LevelLoader class is reading them one by one.
+
+Run this app by starting Controller.main() and have fun :)
