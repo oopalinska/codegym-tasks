@@ -3,7 +3,6 @@ package big_task3410_sokoban.view;
 import big_task3410_sokoban.controller.EventListener;
 import big_task3410_sokoban.model.Direction;
 import big_task3410_sokoban.model.GameObject;
-import big_task3410_sokoban.model.GameObjects;
 
 import javax.swing.*;
 import java.awt.*;
@@ -25,15 +24,18 @@ public class Board extends JPanel {
         this.eventListener = eventListener;
     }
 
+    @Override
     public void paint(Graphics g) {
         g.setColor(Color.BLACK);
-        g.fillRect(view.getX(), view.getY(), view.getWidth(), view.getHeight());
-        GameObjects gameObjects = view.getGameObjects();
-        Set<GameObject> all = gameObjects.getAll();
-        for (GameObject gameObject : all) {
+        g.fillRect(0, 0, getWidth(), getHeight());
+
+        Set<GameObject> gameObjects = view.getGameObjects().getAll();
+
+        for (GameObject gameObject : gameObjects) {
             gameObject.draw(g);
         }
     }
+
 
     public class KeyHandler extends KeyAdapter {
 
